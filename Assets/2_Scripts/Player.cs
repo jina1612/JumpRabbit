@@ -42,5 +42,7 @@ public class Player : MonoBehaviour
     {
         rigd.velocity = Vector2.zero;
         anim.SetInteger("StateID", 0);
+
+        CameraManager.Instance.OnFollow(transform.position);
     }
 }
