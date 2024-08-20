@@ -6,10 +6,10 @@ public class PlatformManager : MonoBehaviour
     [System.Serializable]
     public class Data
     {
-        public int GroupCount;
-        [SerializeField] private float LargePercent;
-        [SerializeField] private float MiddlePercent;
-        [SerializeField] private float SmallPercent;
+        [Tooltip("ÇÃ·§Æû ±×·ì °¹¼ö")]public int GroupCount;
+        [Tooltip("Å« ÇÃ·§Æû ºñÀ²(0~1.0"), Range(0,1f)][SerializeField] private float LargePercent;
+        [Tooltip("Áß°£ ÇÃ·§Æû ºñÀ²(0~1.0"), Range(0, 1f)][SerializeField] private float MiddlePercent;
+        [Tooltip("ÀÛÀº ÇÃ·§Æû ºñÀ²(0~1.0"), Range(0, 5f)][SerializeField] private float SmallPercent;
 
         public int GetPlatformID()
         {
@@ -34,29 +34,23 @@ public class PlatformManager : MonoBehaviour
     }
 
     [SerializeField] private Transform spawnPosTrf;
-    [SerializeField] private Platform[] LargePlatformArr;
-    [SerializeField] private Platform[] MiddlePlatformArr;
-    [SerializeField] private Platform[] SmallPlatformArr;
-    [SerializeField] private Data[] DataArr;
+    
     private int platformNum = 0;
-
-    [SerializeField] private float GapIntervaIMin = 1.0f;
-    [SerializeField] private float GapIntervalMax = 2.0f;
 
     Dictionary<int, Platform[]> PlatformArrDic = new Dictionary<int, Platform[]>();
 
     internal void Init()
     {
-        PlatformArrDic.Add(0, LargePlatformArr);
-        PlatformArrDic.Add(1, MiddlePlatformArr);
-        PlatformArrDic.Add(2, SmallPlatformArr);
+        PlatformArrDic.Add(0, DataBaseManager.Instance.LargePlatformArr);
+        PlatformArrDic.Add(1, DataBaseManager.Instance.MiddlePlatformArr);
+        PlatformArrDic.Add(2, DataBaseManager.Instance.SmallPlatformArr);
     }
     internal void Active()
     {
         Vector3 pos = spawnPosTrf.position;
 
         int platformGroupSum = 0;
-        foreach (Data data in DataArr)
+        foreach (Data data in DataBaseManager.Instance.DataArr)
         {
             platformGroupSum += data.GroupCount;
 
@@ -84,7 +78,7 @@ public class PlatformManager : MonoBehaviour
 
         platform.Active(pos);
 
-        float gap = Random.Range(GapIntervaIMin, GapIntervalMax);
+        float gap = Random.Range(DataBaseManager.Instance.GapIntervaIMin, DataBaseManager.Instance.GapIntervalMax);
         pos = pos + Vector3.right * (platform.HalfSizeX + gap);
         return pos;
     }
