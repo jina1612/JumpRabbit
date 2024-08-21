@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb2ce34787ea017418ce163ec17f308a, type: 3}
   m_Name: DataBaseManager
   m_EditorClassIdentifier: 
-  JumpPowerIncrease: 1
+  JumpPowerIncrease: 3
   LargePlatformArr:
   - {fileID: 5448806919956201743, guid: b1e2e255a56c6d540893f93f4006d365, type: 3}
   - {fileID: 5448806919956201743, guid: 771e6b197c4a5f549b4dfbfe3cb8d021, type: 3}
@@ -41,3 +41,4 @@ MonoBehaviour:
     SmallPercent: 0.4
   GapIntervaIMin: 1
   GapIntervalMax: 2
+  follwSpeed: 5
