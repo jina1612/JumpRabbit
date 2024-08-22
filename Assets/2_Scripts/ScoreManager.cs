@@ -7,6 +7,7 @@ public class ScoreManager : MonoBehaviour
 {
    public static ScoreManager Instance;
     [SerializeField] private TextMeshProUGUI scoreTmp;
+    [SerializeField] private Score baseScore;
 
    private int totalScore;
     public void Init()
@@ -15,8 +16,11 @@ public class ScoreManager : MonoBehaviour
     }
 
 
-    public void AddScore(int score)
+    public void AddScore(int score, Vector2 scorePos)
     {
+        Score scoreObject = Instantiate(baseScore);
+        scoreObject.transform.position = scorePos;
+        scoreObject.Active(score);
         totalScore += score;
         scoreTmp.text = totalScore.ToString();
     }

@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -19,11 +16,19 @@ public class GameManager : MonoBehaviour
         platformManager.Init();
         cameraManager.Init();
         scoreManager.Init();
-        
+
     }
 
     private void Start()
     {
         platformManager.Active();
+
+        int a = 123456;
+        Debug.Log("Extension Test int : " + a.ToString());
+
+        float b = 123456.789f;
+        Debug.Log("Extension Test float : " + b.ToFormatString(1));
+        Debug.Log("Extension Test float : " + b.ToFormatString(2));
+        Debug.Log("Extension Test float : " + b.ToFormatString(3));
     }
 }
