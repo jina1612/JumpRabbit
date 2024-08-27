@@ -8,6 +8,11 @@ public class DataBaseManager : ScriptableObject
 {
     public static DataBaseManager Instance;
 
+    [Header("연출")]
+    public Color ScoreColor;
+    public Color BonusColor;
+    public float ScorePopinterval = 0.2f;
+
     [Header("플레이어")]
     public float JumpPowerIncrease = 1;
 
