@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -23,5 +24,15 @@ public class ScoreManager : MonoBehaviour
         scoreObject.Active(score);
         totalScore += score;
         scoreTmp.text = totalScore.ToString();
+    }
+
+    internal void AddBonus(float bonusValue, Vector3 position)
+    {
+        throw new NotImplementedException();
+    }
+
+    internal void ResetBonus()
+    {
+        throw new NotImplementedException();
     }
 }
