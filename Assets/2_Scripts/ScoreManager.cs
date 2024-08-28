@@ -48,7 +48,7 @@ public class ScoreManager : MonoBehaviour
             }
     }
     
-    public void AddScore(int score, Vector2 scorePos)
+    public void AddScore(int score, Vector2 scorePos, bool isCalcBonus = true)
     {
         //애니
         scoreDataList.Add(new ScoreData()
@@ -61,16 +61,22 @@ public class ScoreManager : MonoBehaviour
         //canvas
         totalScore += score;
         scoreTmp.text = totalScore.ToString();
+
+        if (isCalcBonus)
+        {
+            int bounsScore = (int)(score * totalBonus);
+            AddScore(bounsScore, scorePos, false);
+        }
     }
 
-    internal void AddBonus(float bonus, Vector2 position)
+    internal void AddBonus(float bonus, Vector2 bonusPos)
     {
         //애니
         scoreDataList.Add(new ScoreData()
         {
-            str = "Bonus " + bonus.ToString(),
+            str = "Bonus 초기화 ...",
             color = DataBaseManager.Instance.ScoreColor,
-            pos = position
+            pos = bonusPos
         });
 
         //canvas
@@ -78,7 +84,7 @@ public class ScoreManager : MonoBehaviour
         bonusTmp.text = totalBonus.ToPercenString();
     }
 
-    internal void ResetBonus()
+    internal void ResetBonus(Vector2 bonusPos)
     {
         totalBonus = 0;
         bonusTmp.text = totalBonus.ToPercenString();
