@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
-using UnityEngine.XR;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -31,6 +29,7 @@ public class ScoreManager : MonoBehaviour
     private IEnumerator OnScoreCor()
     {
         while (true)
+        {
             if (scoreDataList.Count > 0)
             {
                 ScoreData data = scoreDataList[0];
@@ -38,16 +37,18 @@ public class ScoreManager : MonoBehaviour
                 Score scoreObj = Instantiate<Score>(baseScore);
                 scoreObj.transform.position = data.pos;
                 scoreObj.Active(data.str, data.color);
+                Debug.Log($"Data Str:{data.str}, data.color:{data.color}");
 
                 scoreDataList.RemoveAt(0);
                 yield return new WaitForSeconds(DataBaseManager.Instance.ScorePopinterval);
             }
-            else 
+            else
             {
                 yield return null;
             }
+        }
     }
-    
+
     public void AddScore(int score, Vector2 scorePos, bool isCalcBonus = true)
     {
         //애니
@@ -57,7 +58,7 @@ public class ScoreManager : MonoBehaviour
             color = DataBaseManager.Instance.ScoreColor,
             pos = scorePos
         });
-        
+
         //canvas
         totalScore += score;
         scoreTmp.text = totalScore.ToString();
@@ -69,14 +70,14 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-    internal void AddBonus(float bonus, Vector2 bonusPos)
+    internal void AddBonus(float bonus, Vector2 position)
     {
         //애니
         scoreDataList.Add(new ScoreData()
         {
-            str = "Bonus 초기화 ...",
-            color = DataBaseManager.Instance.ScoreColor,
-            pos = bonusPos
+            str = "Bonus " + bonus.ToPercenString(),
+            color = DataBaseManager.Instance.BonusColor,
+            pos = position
         });
 
         //canvas
@@ -86,6 +87,13 @@ public class ScoreManager : MonoBehaviour
 
     internal void ResetBonus(Vector2 bonusPos)
     {
+        scoreDataList.Add(new ScoreData()
+        {
+            str = "Bonus 초기화 ...",
+            color = DataBaseManager.Instance.BonusColor,
+            pos = bonusPos
+        });
+
         totalBonus = 0;
         bonusTmp.text = totalBonus.ToPercenString();
     }

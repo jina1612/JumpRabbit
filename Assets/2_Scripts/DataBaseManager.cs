@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
@@ -13,11 +11,16 @@ public class DataBaseManager : ScriptableObject
     public Color BonusColor;
     public float ScorePopinterval = 0.2f;
 
+    [Header("¾ÆÀÌÅÛ")]
+    public Item baseItem;
+    public float itemSpawnPer = 0.2f;
+    public float itemBonus = 0.25f;
+ 
     [Header("ÇÃ·¹ÀÌ¾î")]
     public float JumpPowerIncrease = 1;
 
     [Header("ÇÃ·§Æû")]
-    [Tooltip("Å« ÇÃ·§Æû Preb")]public Platform[] LargePlatformArr;
+    [Tooltip("Å« ÇÃ·§Æû Preb")] public Platform[] LargePlatformArr;
     [Tooltip("Áß°£ ÇÃ·§Æû Preb")] public Platform[] MiddlePlatformArr;
     [Tooltip("ÀÛÀº ÇÃ·§Æû Preb")] public Platform[] SmallPlatformArr;
     [Tooltip("ÇÃ·§Æû ¹èÄ¡ Preb")] public PlatformManager.Data[] DataArr;
