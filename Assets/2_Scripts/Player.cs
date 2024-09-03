@@ -36,6 +36,9 @@ public class Player : MonoBehaviour
             JumpPower = 0;
 
             anim.SetInteger("StateID", 2);
+
+            Define.SfxType sfxType = Random.value < 0.5f ? Define.SfxType.Jump1 : Define.SfxType.Jump2;
+            SoundManager.instance.PlaySfx(sfxType);
         }
     }
 
@@ -50,7 +53,7 @@ public class Player : MonoBehaviour
         {
             if (landedPlatform != platform)
                 ScoreManager.Instance.AddBonus(DataBaseManager.Instance.BonusValue, transform.position);
-            else 
+            else
                 ScoreManager.Instance.ResetBonus(transform.position);
 
             ScoreManager.Instance.AddScore(platform.Score, platform.transform.position);

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
@@ -30,11 +31,33 @@ public class DataBaseManager : ScriptableObject
     [Tooltip("플랫폼 최대 간격")] public float GapIntervalMax = 2.0f;
     [Tooltip("보너스 추가 점수")] public float BonusValue = 0.05f;
 
+    [Header("카메라")]
     public float follwSpeed = 5;
 
+    [Header("사운드")]
+    public SfxData[] sfxDataArr;
+    private Dictionary<Define.SfxType, SfxData> sfxDataDic = new Dictionary<Define.SfxType, SfxData>();
 
     public void Init()
     {
         Instance = this;
+
+        foreach (SfxData data in sfxDataArr)
+        {
+            sfxDataDic.Add(data.sfxType, data);
+        }
+    }
+
+    public SfxData GetSfxData(Define.SfxType type)
+    {
+        return sfxDataDic[type];
+    }
+
+
+    [System.Serializable]
+    public class SfxData
+    {
+        public Define.SfxType sfxType;
+        public AudioClip clip;
     }
 }
