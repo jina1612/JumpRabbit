@@ -23,13 +23,6 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         platformManager.Active();
-
-        int a = 123456;
-        Debug.Log("Extension Test int : " + a.ToString());
-
-        float b = 123456.789f;
-        Debug.Log("Extension Test float : " + b.ToFormatString(1));
-        Debug.Log("Extension Test float : " + b.ToFormatString(2));
-        Debug.Log("Extension Test float : " + b.ToFormatString(3));
+        soundManager.PlayBgm(Define.BgmType.Main);
     }
 }
