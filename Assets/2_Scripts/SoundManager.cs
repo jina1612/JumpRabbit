@@ -15,7 +15,7 @@ public class SoundManager : MonoBehaviour
 
     public void PlaySfx(Define.SfxType sfxType)
     {
-        AudioClip audioClip = DataBaseManager.Instance.GetSfxAudioClip(sfxType);
-        sfxAudioSource.PlayOneShot(audioClip);
+        DataBaseManager.SfxData sfxdata = DataBaseManager.Instance.GetSfxData(sfxType);
+        sfxAudioSource.PlayOneShot(sfxdata.clip);
     }
 }
