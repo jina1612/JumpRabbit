@@ -51,6 +51,8 @@ public class Player : MonoBehaviour
 
         if (collision.transform.parent.TryGetComponent(out Platform platform))
         {
+            platform.OnLandingAnimation();
+
             if (landedPlatform != platform)
                 ScoreManager.Instance.AddBonus(DataBaseManager.Instance.BonusValue, transform.position);
             else
