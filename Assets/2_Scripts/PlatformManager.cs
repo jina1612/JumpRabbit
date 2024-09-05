@@ -73,10 +73,11 @@ public class PlatformManager : MonoBehaviour
 
         Platform platform = Instantiate(randomPlatform);
 
-        if (platformNum != 0)
+        bool isFirstFrame = platformNum == 0;
+        if (isFirstFrame ==  false)
             pos = pos + Vector3.right * platform.HalfSizeX;
 
-        platform.Active(pos);
+        platform.Active(pos, isFirstFrame);
 
         float gap = Random.Range(DataBaseManager.Instance.GapIntervaIMin, DataBaseManager.Instance.GapIntervalMax);
         pos = pos + Vector3.right * (platform.HalfSizeX + gap);

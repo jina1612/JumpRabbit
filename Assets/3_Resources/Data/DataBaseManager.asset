@@ -15,8 +15,9 @@ MonoBehaviour:
   ScoreColor: {r: 0.9528302, g: 0.9483357, b: 0.9483357, a: 0}
   BonusColor: {r: 1, g: 0.4117647, b: 0.13725491, a: 0}
   ScorePopinterval: 0.4
+  effect: {fileID: 1242091139401847278, guid: fd93e94941a84fe41b263640b80cf546, type: 3}
   baseItem: {fileID: 6725628898087290224, guid: 39a9bddab216514418c8b1e75d7e1460, type: 3}
-  itemSpawnPer: 0.8
+  itemSpawnPer: 1
   itemBonus: 0.25
   JumpPowerIncrease: 3
   LargePlatformArr:
@@ -33,7 +34,7 @@ MonoBehaviour:
   - {fileID: 2621925048396062058, guid: ae4834b841717fb408e9c248744ca105, type: 3}
   - {fileID: 2621925048396062058, guid: 897d52f688b2e724882b5a9119f231a1, type: 3}
   DataArr:
-  - GroupCount: 3
+  - GroupCount: 30
     LargePercent: 1
     MiddlePercent: 0
     SmallPercent: 0

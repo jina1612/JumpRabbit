@@ -39,6 +39,10 @@ public class Player : MonoBehaviour
 
             Define.SfxType sfxType = Random.value < 0.5f ? Define.SfxType.Jump1 : Define.SfxType.Jump2;
             SoundManager.instance.PlaySfx(sfxType);
+
+           Effect effect =  Instantiate(DataBaseManager.Instance.effect);
+            effect.Active(transform.position);
+
         }
     }
 
@@ -49,9 +53,15 @@ public class Player : MonoBehaviour
 
         CameraManager.Instance.OnFollow(transform.position);
 
-        if (collision.transform.parent.TryGetComponent(out Platform platform))
+        if (collision.transform.TryGetComponent(out Platform platform))
         {
             platform.OnLandingAnimation();
+
+            if (landedPlatform == null)
+            {
+                landedPlatform = platform;
+                return;
+            }
 
             if (landedPlatform != platform)
                 ScoreManager.Instance.AddBonus(DataBaseManager.Instance.BonusValue, transform.position);
