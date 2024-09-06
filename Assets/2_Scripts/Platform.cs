@@ -4,6 +4,7 @@ public class Platform : MonoBehaviour
 {
     private BoxCollider2D col;
     private Animation anim;
+    public int number;
     [SerializeField] private int score;
     public float HalfSizeX => col.size.x * 0.5f;
 

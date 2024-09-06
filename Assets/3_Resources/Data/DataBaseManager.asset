@@ -35,15 +35,15 @@ MonoBehaviour:
   - {fileID: 2621925048396062058, guid: ae4834b841717fb408e9c248744ca105, type: 3}
   - {fileID: 2621925048396062058, guid: 897d52f688b2e724882b5a9119f231a1, type: 3}
   DataArr:
-  - GroupCount: 30
+  - GroupCount: 2
     LargePercent: 1
     MiddlePercent: 0
     SmallPercent: 0
-  - GroupCount: 3
+  - GroupCount: 2
     LargePercent: 0
     MiddlePercent: 1
     SmallPercent: 0
-  - GroupCount: 3
+  - GroupCount: 1
     LargePercent: 0.3
     MiddlePercent: 0.3
     SmallPercent: 0.4
