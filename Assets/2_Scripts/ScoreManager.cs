@@ -23,7 +23,14 @@ public class ScoreManager : MonoBehaviour
     public void Init()
     {
         Instance = this;
+    }
+
+    public void Active()
+    {
         StartCoroutine(OnScoreCor());
+
+        scoreTmp.text = totalScore.ToString();
+        bonusTmp.text = totalBonus.ToPercenString();
     }
 
     private IEnumerator OnScoreCor()

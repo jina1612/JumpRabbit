@@ -42,7 +42,11 @@ public class Player : MonoBehaviour
 
            Effect effect =  Instantiate(DataBaseManager.Instance.effect);
             effect.Active(transform.position);
+        }
 
+        if (transform.position.y < DataBaseManager.Instance.GameOverYHeight)
+        {
+            GameManager.instance.OnGameOver();
         }
     }
 
