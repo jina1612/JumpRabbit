@@ -15,11 +15,12 @@ public class Platform : MonoBehaviour
         col = GetComponentInChildren<BoxCollider2D>();
         anim = GetComponent<Animation>();
     }
-    public void Active(Vector2 pos, bool isFirstFrame)
+    public void Active(Vector2 pos, int platformNum)
     {
         transform.position = pos;
+        number = platformNum;
 
-        if (isFirstFrame)
+        if (platformNum == 1)
             return;
     
         if (Random .value < DataBaseManager.Instance.itemSpawnPer)

@@ -7,8 +7,8 @@ public class PlatformManager : MonoBehaviour
     [System.Serializable]
     public class Data
     {
-        [Tooltip("ÇÃ·§Æû ±×·ì °¹¼ö")]public int GroupCount;
-        [Tooltip("Å« ÇÃ·§Æû ºñÀ²(0~1.0"), Range(0,1f)][SerializeField] private float LargePercent;
+        [Tooltip("ÇÃ·§Æû ±×·ì °¹¼ö")] public int GroupCount;
+        [Tooltip("Å« ÇÃ·§Æû ºñÀ²(0~1.0"), Range(0, 1f)][SerializeField] private float LargePercent;
         [Tooltip("Áß°£ ÇÃ·§Æû ºñÀ²(0~1.0"), Range(0, 1f)][SerializeField] private float MiddlePercent;
         [Tooltip("ÀÛÀº ÇÃ·§Æû ºñÀ²(0~1.0"), Range(0, 5f)][SerializeField] private float SmallPercent;
 
@@ -53,7 +53,7 @@ public class PlatformManager : MonoBehaviour
 
     public void Update()
     {
-            Debug.Log("platformNum");
+        Debug.Log($"platformNum:{platformNum}, LandingPlatformNum:{LandingPlatformNum}, remainPlatformCount:{DataBaseManager.Instance.remainPlatformCount}");
         if (platformNum - LandingPlatformNum < DataBaseManager.Instance.remainPlatformCount)
         {
             int lastIndex = DataBaseManager.Instance.DataArr.Length - 1;
@@ -68,7 +68,7 @@ public class PlatformManager : MonoBehaviour
     }
     internal void Active()
     {
-         spawnPos = spawnPosTrf.position;
+        spawnPos = spawnPosTrf.position;
 
         int platformGroupSum = 0;
         foreach (Data data in DataBaseManager.Instance.DataArr)
@@ -93,11 +93,10 @@ public class PlatformManager : MonoBehaviour
 
         Platform platform = Instantiate(randomPlatform);
 
-        bool isFirstFrame = platformNum == 0;
         if (platformNum > 1)
             spawnPos = spawnPos + Vector3.right * platform.HalfSizeX;
 
-        platform.Active(spawnPos, platform);
+        platform.Active(spawnPos, platformNum);
 
         float gap = Random.Range(DataBaseManager.Instance.GapIntervaIMin, DataBaseManager.Instance.GapIntervalMax);
         spawnPos = spawnPos + Vector3.right * (platform.HalfSizeX + gap);

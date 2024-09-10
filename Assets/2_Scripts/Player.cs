@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
 
     private Rigidbody2D rigd;
     private Animator anim;
+    private bool isJumpReady;
 
     private void Awake()
     {
@@ -21,27 +22,43 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if ((isJumpReady == false))
         {
-            anim.SetInteger("StateID", 1);
-
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                isJumpReady = true;
+                anim.SetInteger("StateID", 1);
+            }
         }
-        else if (Input.GetKey(KeyCode.Space))
+        else
         {
-            JumpPower += DataBaseManager.Instance.JumpPowerIncrease;
-        }
-        else if (Input.GetKeyUp(KeyCode.Space))
-        {
-            rigd.AddForce(Vector2.one * JumpPower);
-            JumpPower = 0;
+            JumpPower += DataBaseManager.Instance.JumpPowerIncrease * Time.deltaTime;
+            if (JumpPower > DataBaseManager.Instance.maxJumpPower)
+            {
+                SetIdleState();
+                return;
+            }
+            if (Input.GetKeyUp(KeyCode.Space))
+            {
+                isJumpReady = false;
+                if (JumpPower < DataBaseManager.Instance.minJumpPower)
+                {
+                    SetIdleState();
+                }
+                else
+                {
+                    rigd.AddForce(Vector2.one * JumpPower);
+                    JumpPower = 0;
 
-            anim.SetInteger("StateID", 2);
+                    anim.SetInteger("StateID", 2);
 
-            Define.SfxType sfxType = Random.value < 0.5f ? Define.SfxType.Jump1 : Define.SfxType.Jump2;
-            SoundManager.instance.PlaySfx(sfxType);
+                    Define.SfxType sfxType = Random.value < 0.5f ? Define.SfxType.Jump1 : Define.SfxType.Jump2;
+                    SoundManager.instance.PlaySfx(sfxType);
 
-           Effect effect =  Instantiate(DataBaseManager.Instance.effect);
-            effect.Active(transform.position);
+                    Effect effect = Instantiate(DataBaseManager.Instance.effect);
+                    effect.Active(transform.position);
+                }
+            }
         }
 
         if (transform.position.y < DataBaseManager.Instance.GameOverYHeight)
@@ -52,8 +69,7 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        rigd.velocity = Vector2.zero;
-        anim.SetInteger("StateID", 0);
+        SetIdleState();
 
         CameraManager.Instance.OnFollow(transform.position);
 
@@ -79,5 +95,12 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void SetIdleState()
+    {
+        rigd.velocity = Vector2.zero;
+        anim.SetInteger("StateID", 0);
+        JumpPower = 0;
+        isJumpReady = false;
+    }
 }
 

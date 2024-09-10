@@ -21,6 +21,8 @@ public class DataBaseManager : ScriptableObject
     [Header("ÇÃ·¹ÀÌ¾î")]
     public float JumpPowerIncrease = 1;
     public float GameOverYHeight = -7f;
+    public float minJumpPower = 300f;
+    public float maxJumpPower = 500f;
 
     [Header("ÇÃ·§Æû")]
     [Tooltip("Å« ÇÃ·§Æû Preb")] public Platform[] LargePlatformArr;
